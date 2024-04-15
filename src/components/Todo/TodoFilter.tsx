@@ -15,7 +15,10 @@ export function Filters() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger
+        asChild
+        className="bg-gradient-bg font-semibold text-white"
+      >
         <Button variant="outline">Filters</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
