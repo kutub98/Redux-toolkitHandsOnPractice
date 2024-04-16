@@ -15,17 +15,16 @@ import { DialogClose } from '@radix-ui/react-dialog';
 import { FormEvent, useState } from 'react';
 
 export function AddTodo() {
-  const [task, setTask] = useState();
-  const [description, setDescription] = useState();
-  const dispatch = useAppDispatch()
+  const [task, setTask] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const dispatch = useAppDispatch();
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     const taskDetails = {
       title: task,
-      description: description
-    }
-    dispatch(addTodo(taskDetails))
-    
+      description: description,
+    };
+    dispatch(addTodo(taskDetails));
   };
   return (
     <Dialog>
@@ -67,10 +66,11 @@ export function AddTodo() {
                 className="col-span-3"
               />
             </div>
-            <div className='flex justify-end'>
+            <div className="flex justify-end">
               <DialogClose asChild>
-                <Button className='bg-gradient-bg' type="submit">Save changes</Button>
-                
+                <Button className="bg-gradient-bg" type="submit">
+                  Save changes
+                </Button>
               </DialogClose>
             </div>
           </div>
