@@ -8,7 +8,7 @@ import { useAppDispatch } from '@/Redux/Hooks/Hooks';
 //   description: string;
 //   isCompleted?: boolean;
 // };
-const TodoCard = ({ id, title, description, isCompleted }: TTodo) => {
+const TodoCard = ({ id, title, description, isCompleted, priority }: TTodo) => {
   const dispatch = useAppDispatch();
 
   const onDeleteHandle = () => {
@@ -37,6 +37,7 @@ const TodoCard = ({ id, title, description, isCompleted }: TTodo) => {
             <p className="text-red-600 font-semibold">Pending</p>
           )}
         </h1>
+        <h1>{ priority}</h1>
         <div className="flex space-x-3">
           <Button className="bg-red-700">
             <svg

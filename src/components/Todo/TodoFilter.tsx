@@ -10,8 +10,18 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-export function Filters() {
-  const [position, setPosition] = React.useState('bottom');
+interface FiltersProps {
+  onChange: (selectedFilter: "All" | "High" | "Medium" | "Low") => void; 
+}
+
+const Filters: React.FC<FiltersProps> = ({ onChange }) => {
+  const handleFilterChange = (selectedFilter: "All" | "High" | "Medium" | "Low") => {
+    onChange(selectedFilter);
+  };
+
+  const handleValueChange = (value: string) => {
+    handleFilterChange(value as "All" | "High" | "Medium" | "Low");
+  };
 
   return (
     <DropdownMenu>
@@ -23,12 +33,15 @@ export function Filters() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+        <DropdownMenuRadioGroup value="" onValueChange={handleValueChange}>
+          <DropdownMenuRadioItem value="All">All</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="High">High</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="Medium">Medium</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="Low">Low</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
+
+export default Filters;

@@ -17,17 +17,26 @@ import { FormEvent, useState } from 'react';
 export function AddTodo() {
   const [task, setTask] = useState<string>('');
   const [description, setDescription] = useState<string>('');
+  const [priority, setpriority] = useState<string>('All');
+
+
   const dispatch = useAppDispatch();
   const onSubmit = (e: FormEvent) => {
     const randomString = Math.random().toString(36).substring(2, 12);
-    console.log(randomString);
+
     e.preventDefault();
     const taskDetails = {
       id: randomString,
       title: task,
+      priority: priority,
       description: description,
     };
+    console.log(taskDetails);
     dispatch(addTodo(taskDetails));
+  };
+
+  const selectPriority = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setpriority(e.target.value);
   };
   return (
     <Dialog>
@@ -68,6 +77,17 @@ export function AddTodo() {
                 required
                 className="col-span-3"
               />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="description" className="text-right">
+                Priority
+              </Label>
+              <select value={priority} onChange={selectPriority} name="priority" id="priority">
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+                <option value="All">All</option>
+              </select>
             </div>
             <div className="flex justify-end">
               <DialogClose asChild>
