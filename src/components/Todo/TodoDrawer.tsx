@@ -19,8 +19,11 @@ export function AddTodo() {
   const [description, setDescription] = useState<string>('');
   const dispatch = useAppDispatch();
   const onSubmit = (e: FormEvent) => {
+    const randomString = Math.random().toString(36).substring(2, 12);
+    console.log(randomString);
     e.preventDefault();
     const taskDetails = {
+      id: randomString,
       title: task,
       description: description,
     };

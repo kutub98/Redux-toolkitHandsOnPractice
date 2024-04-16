@@ -1,16 +1,46 @@
+import { removeTodo, toggleStatus, TTodo } from '@/Redux/Features/TodoSlice';
 import { Button } from '../ui/button';
+import { useAppDispatch } from '@/Redux/Hooks/Hooks';
 
-const TodoCard = () => {
+// type Ttask = {
+//   id: string;
+//   title: string;
+//   description: string;
+//   isCompleted?: boolean;
+// };
+const TodoCard = ({ id, title, description, isCompleted }: TTodo) => {
+  const dispatch = useAppDispatch();
+
+  const onDeleteHandle = () => {
+    dispatch(removeTodo(id));
+  };
+  const HandleStatus = () => {
+    dispatch(toggleStatus(id));
+  };
   return (
-    <div className="w-full h-auto p-0 rounded-md  border items-start justify-center border-gray-300">
-      <div className="flex justify-between  space-x-2 bg-white p-3 rounded items-center">
-        <input type="checkbox" />
-        <h1>Todo Title</h1>
-        <h1>Time</h1>
-        <h1>Todo Description</h1>
+    <div className="w-full h-auto p-0 rounded-md  border space-y-2 items-start justify-center border-gray-300">
+      <div className="flex justify-between  space-x-2 bg-white px-4 py-2 rounded items-center">
+        <input
+          onChange={HandleStatus}
+          name="isCompeleted"
+          id="isCompeleted"
+          type="checkbox"
+          checked={isCompleted}
+        />
+        <h1>{title}</h1>
+        {/* <h1>Time</h1> */}
+        <h1>{description}</h1>
+        <h1>
+          {isCompleted ? (
+            <p className="text-green-600 font-semibold">Done</p>
+          ) : (
+            <p className="text-red-600 font-semibold">Pending</p>
+          )}
+        </h1>
         <div className="flex space-x-3">
           <Button className="bg-red-700">
             <svg
+              onClick={onDeleteHandle}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
