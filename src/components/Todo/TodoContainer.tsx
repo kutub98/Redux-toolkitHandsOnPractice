@@ -3,12 +3,19 @@ import TodoCard from './TodoCard';
 import { AddTodo } from './TodoDrawer';
 import Filters from './TodoFilter';
 import { useState } from 'react';
+import { useGetTaskQuery } from '@/Redux/api/api';
 
 const TodoContainer = () => {
-  const { todo } = useAppSelector(todo => todo.todo);
+  // from localHost
+  // const { todo } = useAppSelector(todo => todo.todo);
+
+  // from server
+  const { data:todo, isLoading, isError } = useGetTaskQuery(undefined);
   const [selectedPriority, setSelectedPriority] = useState<
     'All' | 'High' | 'Medium' | 'Low'
   >('All');
+
+  console.log(todo, 'from data todo');
   const sortedTodos = [...todo].sort((a, b) => {
     if (a.isCompleted === b.isCompleted) return 0;
     return a.isCompleted ? 1 : -1;
@@ -18,7 +25,7 @@ const TodoContainer = () => {
     if (selectedPriority === 'All') {
       return true;
     } else {
-      return item.priority === selectedPriority; 
+      return item.priority === selectedPriority;
     }
   });
 
