@@ -1,6 +1,7 @@
 import { removeTodo, toggleStatus, TTodo } from '@/Redux/Features/TodoSlice';
 import { Button } from '../ui/button';
 import { useAppDispatch } from '@/Redux/Hooks/Hooks';
+import { useDeleteTodoMutation } from '@/Redux/api/api';
 
 // type Ttask = {
 //   id: string;
@@ -8,14 +9,22 @@ import { useAppDispatch } from '@/Redux/Hooks/Hooks';
 //   description: string;
 //   isCompleted?: boolean;
 // };
-const TodoCard = ({ id, title, description, isCompleted, priority }: TTodo) => {
-  const dispatch = useAppDispatch();
+const TodoCard = ({
+  _id,
+  title,
+  description,
+  isCompleted,
+  priority,
+}: TTodo) => {
+  // const dispatch = useAppDispatch();
 
+  const [deleteTodo] = useDeleteTodoMutation();
   const onDeleteHandle = () => {
-    dispatch(removeTodo(id));
+    // dispatch(removeTodo(_id));
+    deleteTodo(_id);
   };
   const HandleStatus = () => {
-    dispatch(toggleStatus(id));
+    // dispatch(toggleStatus(_id));
   };
   return (
     <div className="w-full bg-white h-auto p-0 rounded-md  border  items-start justify-center border-gray-300">

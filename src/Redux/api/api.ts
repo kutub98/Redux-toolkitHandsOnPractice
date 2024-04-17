@@ -13,7 +13,6 @@ export const baseApi = createApi({
     }),
     addTask: builder.mutation({
       query: taskDetails => {
-        console.log('inside data', taskDetails);
         return {
           url: '/task',
           method: 'POST',
@@ -22,7 +21,15 @@ export const baseApi = createApi({
       },
       invalidatesTags: ['todo'],
     }),
+    deleteTodo: builder.mutation({
+      query: id => ({
+        url: `/task/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['todo'],
+    }),
   }),
 });
 
-export const { useGetTaskQuery, useAddTaskMutation } = baseApi;
+export const { useGetTaskQuery, useAddTaskMutation, useDeleteTodoMutation } =
+  baseApi;
