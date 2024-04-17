@@ -18,7 +18,7 @@ const TodoCard = ({ id, title, description, isCompleted, priority }: TTodo) => {
     dispatch(toggleStatus(id));
   };
   return (
-    <div className="w-full h-auto p-0 rounded-md  border space-y-2 items-start justify-center border-gray-300">
+    <div className="w-full bg-white h-auto p-0 rounded-md  border  items-start justify-center border-gray-300">
       <div className="flex justify-between  space-x-2 bg-white px-4 py-2 rounded items-center">
         <input
           onChange={HandleStatus}
@@ -26,19 +26,29 @@ const TodoCard = ({ id, title, description, isCompleted, priority }: TTodo) => {
           id="isCompeleted"
           type="checkbox"
           checked={isCompleted}
+          className="mr-2"
         />
-        <h1>{title}</h1>
+        <h1 className="flex-1">{title}</h1>
         {/* <h1>Time</h1> */}
-        <h1>{description}</h1>
-        <h1>
+        <h1 className="flex-1">{description}</h1>
+        <h1 className="flex-1 text-center">
           {isCompleted ? (
             <p className="text-green-600 font-semibold">Done</p>
           ) : (
             <p className="text-red-600 font-semibold">Pending</p>
           )}
         </h1>
-        <h1>{ priority}</h1>
-        <div className="flex space-x-3">
+        <div className="flex-1 flex items-center space-x-1">
+          <div
+            className={`size-2 rounded-full flex 
+          ${priority === 'High' ? 'bg-green-600' : null}
+          ${priority === 'Low' ? 'bg-red-600' : null}
+          ${priority === 'Medium' ? 'bg-yellow-600' : null}
+          `}
+          ></div>
+          <h1 className={` text-center `}>{priority}</h1>
+        </div>
+        <div className="flex flex-2 space-x-3">
           <Button className="bg-red-700">
             <svg
               onClick={onDeleteHandle}
@@ -47,7 +57,7 @@ const TodoCard = ({ id, title, description, isCompleted, priority }: TTodo) => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className=" size-6"
+              className=" size-4"
             >
               <path
                 strokeLinecap="round"
@@ -63,7 +73,7 @@ const TodoCard = ({ id, title, description, isCompleted, priority }: TTodo) => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className=" size-6"
+              className=" size-4"
             >
               <path
                 strokeLinecap="round"
