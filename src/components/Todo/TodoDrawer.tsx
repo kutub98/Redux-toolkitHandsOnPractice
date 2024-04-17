@@ -9,8 +9,9 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { addTodo } from '@/Redux/Features/TodoSlice';
-import { useAppDispatch } from '@/Redux/Hooks/Hooks';
+import { useAddTaskMutation } from '@/Redux/api/api';
+// import { addTodo } from '@/Redux/Features/TodoSlice';
+// import { useAppDispatch } from '@/Redux/Hooks/Hooks';
 import { DialogClose } from '@radix-ui/react-dialog';
 import { FormEvent, useState } from 'react';
 
@@ -19,25 +20,30 @@ export function AddTodo() {
   const [description, setDescription] = useState<string>('');
   const [priority, setpriority] = useState<string>('All');
 
+  // !!* for localhost
+  // const dispatch = useAppDispatch();
 
-  const dispatch = useAppDispatch();
+  // for serverhost
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [addTask] = useAddTaskMutation();
   const onSubmit = (e: FormEvent) => {
-    const randomString = Math.random().toString(36).substring(2, 12);
-
     e.preventDefault();
     const taskDetails = {
-      id: randomString,
       title: task,
       priority: priority,
+      isCompleted: false,
       description: description,
     };
-    console.log(taskDetails);
-    dispatch(addTodo(taskDetails));
+    // console.log(taskDetails);
+    // !!* for localhost
+    // dispatch(addTodo(taskDetails));
+    addTask(taskDetails);
   };
 
   const selectPriority = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setpriority(e.target.value);
   };
+
   return (
     <Dialog>
       <DialogTrigger
@@ -82,7 +88,12 @@ export function AddTodo() {
               <Label htmlFor="description" className="text-right">
                 Priority
               </Label>
-              <select value={priority} onChange={selectPriority} name="priority" id="priority">
+              <select
+                value={priority}
+                onChange={selectPriority}
+                name="priority"
+                id="priority"
+              >
                 <option value="High">High</option>
                 <option value="Medium">Medium</option>
                 <option value="Low">Low</option>

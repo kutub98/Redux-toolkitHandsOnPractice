@@ -2,14 +2,27 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const baseApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000' }),
+  tagTypes: ['todo'],
   endpoints: builder => ({
     getTask: builder.query({
       query: () => ({
         url: '/task',
         method: 'GET',
       }),
+      providesTags: ['todo'],
+    }),
+    addTask: builder.mutation({
+      query: taskDetails => {
+        console.log('inside data', taskDetails);
+        return {
+          url: '/task',
+          method: 'POST',
+          body: taskDetails,
+        };
+      },
+      invalidatesTags: ['todo'],
     }),
   }),
 });
 
-export const { useGetTaskQuery } = baseApi;
+export const { useGetTaskQuery, useAddTaskMutation } = baseApi;
