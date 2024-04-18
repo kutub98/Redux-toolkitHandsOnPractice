@@ -10,18 +10,20 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-interface FiltersProps {
-  onChange: (selectedFilter: "All" | "High" | "Medium" | "Low") => void; 
-}
+// interface FiltersProps {
+//   onChange: (selectedFilter: "All" | "High" | "Medium" | "Low") => void;
+// }
 
-const Filters: React.FC<FiltersProps> = ({ onChange }) => {
-  const handleFilterChange = (selectedFilter: "All" | "High" | "Medium" | "Low") => {
-    onChange(selectedFilter);
-  };
 
-  const handleValueChange = (value: string) => {
-    handleFilterChange(value as "All" | "High" | "Medium" | "Low");
-  };
+// const Filters = ({ onChange }) => {
+const Filters = ({ priority, setPriority }) => {
+  // const handleFilterChange = (selectedFilter: "All" | "High" | "Medium" | "Low") => {
+  //   onChange(selectedFilter);
+  // };
+
+  // const handleValueChange = (value: string) => {
+  //   handleFilterChange(value as "All" | "High" | "Medium" | "Low");
+  // };
 
   return (
     <DropdownMenu>
@@ -33,7 +35,7 @@ const Filters: React.FC<FiltersProps> = ({ onChange }) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value="" onValueChange={handleValueChange}>
+        <DropdownMenuRadioGroup value={priority} onValueChange={setPriority}>
           <DropdownMenuRadioItem value="All">All</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="High">High</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="Medium">Medium</DropdownMenuRadioItem>

@@ -10,28 +10,29 @@ const TodoContainer = () => {
   // const { todo } = useAppSelector(todo => todo.todo);
 
   // from server
-  const { data: tasks = [], isLoading, isError } = useGetTaskQuery(undefined);
-  const [selectedPriority, setSelectedPriority] = useState<
-    'All' | 'High' | 'Medium' | 'Low'
-  >('All');
+  const [priority, setPriority] = useState('');
+  const { data: tasks = [], isLoading, isError } = useGetTaskQuery(priority);
+  // console.log(priority);
+  // const [selectedPriority, setSelectedPriority] = useState<
+  //   'All' | 'High' | 'Medium' | 'Low'
+  // >('All');
 
-  console.log(tasks, 'from data todo');
-  const sortedTodos = [...tasks].sort((a, b) => {
-    if (a.isCompleted === b.isCompleted) return 0;
-    return a.isCompleted ? 1 : -1;
-  });
+  // const sortedTodos = [...tasks].sort((a, b) => {
+  //   if (a.isCompleted === b.isCompleted) return 0;
+  //   return a.isCompleted ? 1 : -1;
+  // });
 
-  const filtere = sortedTodos.filter(item => {
-    if (selectedPriority === 'All') {
-      return true;
-    } else {
-      return item.priority === selectedPriority;
-    }
-  });
+  // const filtere = sortedTodos.filter(item => {
+  //   if (selectedPriority === 'All') {
+  //     return true;
+  //   } else {
+  //     return item.priority === selectedPriority;
+  //   }
+  // });
 
-  const handleFilters = (selectedFilter: 'All' | 'High' | 'Medium' | 'Low') => {
-    setSelectedPriority(selectedFilter);
-  };
+  // const handleFilters = (selectedFilter: 'All' | 'High' | 'Medium' | 'Low') => {
+  //   setSelectedPriority(selectedFilter);
+  // };
 
   if (isError) {
     return <p>Something went wrong!</p>;
@@ -44,7 +45,7 @@ const TodoContainer = () => {
     <div className="w-full max-w-7xl mx-auto">
       <div className="flex justify-between bg-white font-semibold mb-6">
         <AddTodo />
-        <Filters onChange={handleFilters} />
+        <Filters priority={priority} setPriority={setPriority} />
       </div>
       <div className="flex justify-between  space-x-2 bg-gradient-bg p-4 rounded items-center">
         <input className="mr-2" type="checkbox" />
@@ -56,8 +57,8 @@ const TodoContainer = () => {
         <h1 className="flex-2">Action</h1>
       </div>
       <div className="  bg-gradient-bg p-2  space-y-2 ">
-        {filtere.length > 0 ? (
-          filtere.map((item, key) => <TodoCard key={key} {...item} />)
+        {tasks.length > 0 ? (
+          tasks.map((item, key) => <TodoCard key={key} {...item} />)
         ) : (
           <div
             className="bg-red-600 text-white
