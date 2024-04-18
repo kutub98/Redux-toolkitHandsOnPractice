@@ -12,15 +12,16 @@ const TodoContainer = () => {
   // from server
   const [priority, setPriority] = useState('');
   const { data: tasks = [], isLoading, isError } = useGetTaskQuery(priority);
-  // console.log(priority);
+  console.log(tasks, 'task');
+  console.log(priority, 'priorty');
   // const [selectedPriority, setSelectedPriority] = useState<
   //   'All' | 'High' | 'Medium' | 'Low'
   // >('All');
 
-  // const sortedTodos = [...tasks].sort((a, b) => {
-  //   if (a.isCompleted === b.isCompleted) return 0;
-  //   return a.isCompleted ? 1 : -1;
-  // });
+  const sortedTodos = [...tasks].sort((a, b) => {
+    if (a.isCompleted === b.isCompleted) return 0;
+    return a.isCompleted ? 1 : -1;
+  });
 
   // const filtere = sortedTodos.filter(item => {
   //   if (selectedPriority === 'All') {
