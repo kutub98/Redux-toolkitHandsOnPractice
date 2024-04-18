@@ -84,7 +84,7 @@ export function AddTodo() {
                 className="col-span-3"
               />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
+            <div className="grid grid-cols-4 w-full items-center gap-4">
               <Label htmlFor="description" className="text-right">
                 Priority
               </Label>
@@ -93,11 +93,12 @@ export function AddTodo() {
                 onChange={selectPriority}
                 name="priority"
                 id="priority"
+                className="w-full col-span-3 p-2 border rounded"
               >
                 <option value="High">High</option>
                 <option value="Medium">Medium</option>
                 <option value="Low">Low</option>
-                <option value="All">All</option>
+                {/* <option value="All">All</option> */}
               </select>
             </div>
             <div className="flex justify-end">

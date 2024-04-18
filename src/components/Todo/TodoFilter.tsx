@@ -14,9 +14,13 @@ import {
 //   onChange: (selectedFilter: "All" | "High" | "Medium" | "Low") => void;
 // }
 
+type TPriority ={
+  priority: string;
+  setPriority: (priority: string) => void;
+}
 
 // const Filters = ({ onChange }) => {
-const Filters = ({ priority, setPriority }) => {
+const Filters = ({ priority, setPriority }: TPriority) => {
   // const handleFilterChange = (selectedFilter: "All" | "High" | "Medium" | "Low") => {
   //   onChange(selectedFilter);
   // };

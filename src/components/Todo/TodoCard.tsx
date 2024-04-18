@@ -1,6 +1,7 @@
-import { removeTodo, toggleStatus, TTodo } from '@/Redux/Features/TodoSlice';
+// import { removeTodo, toggleStatus, TTodo } from '@/Redux/Features/TodoSlice';
+import {  TTodo } from '@/Redux/Features/TodoSlice';
 import { Button } from '../ui/button';
-import { useAppDispatch } from '@/Redux/Hooks/Hooks';
+// import { useAppDispatch } from '@/Redux/Hooks/Hooks';
 import { useDeleteTodoMutation } from '@/Redux/api/api';
 
 // type Ttask = {

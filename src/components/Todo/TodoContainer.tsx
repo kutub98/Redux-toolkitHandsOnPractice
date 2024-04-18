@@ -2,8 +2,10 @@
 import TodoCard from './TodoCard';
 import { AddTodo } from './TodoDrawer';
 import Filters from './TodoFilter';
-import { useState } from 'react';
+import { Key, useState } from 'react';
 import { useGetTaskQuery } from '@/Redux/api/api';
+import { TTodo } from '@/Redux/Features/TodoSlice';
+import { JSX } from 'react/jsx-runtime';
 
 const TodoContainer = () => {
   // from localHost
@@ -18,10 +20,10 @@ const TodoContainer = () => {
   //   'All' | 'High' | 'Medium' | 'Low'
   // >('All');
 
-  const sortedTodos = [...tasks].sort((a, b) => {
-    if (a.isCompleted === b.isCompleted) return 0;
-    return a.isCompleted ? 1 : -1;
-  });
+  // const sortedTodos = [...tasks].sort((a, b) => {
+  //   if (a.isCompleted === b.isCompleted) return 0;
+  //   return a.isCompleted ? 1 : -1;
+  // });
 
   // const filtere = sortedTodos.filter(item => {
   //   if (selectedPriority === 'All') {
@@ -59,7 +61,7 @@ const TodoContainer = () => {
       </div>
       <div className="  bg-gradient-bg p-2  space-y-2 ">
         {tasks.length > 0 ? (
-          tasks.map((item, key) => <TodoCard key={key} {...item} />)
+          tasks.map((item: JSX.IntrinsicAttributes & TTodo, key: Key | null | undefined) => <TodoCard key={key} {...item} />)
         ) : (
           <div
             className="bg-red-600 text-white
