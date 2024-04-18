@@ -39,8 +39,23 @@ export const baseApi = createApi({
       }),
       invalidatesTags: ['todo'],
     }),
+    updateTask: builder.mutation({
+      query: options => {
+        console.log(options, 'from api ');
+        return {
+          url: `/task/${options.id}`,
+          method: 'PUT',
+          body: options.data,
+        };
+      },
+      invalidatesTags: ['todo'],
+    }),
   }),
 });
 
-export const { useGetTaskQuery, useAddTaskMutation, useDeleteTodoMutation } =
-  baseApi;
+export const {
+  useGetTaskQuery,
+  useAddTaskMutation,
+  useDeleteTodoMutation,
+  useUpdateTaskMutation,
+} = baseApi;

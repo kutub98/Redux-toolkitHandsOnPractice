@@ -14,16 +14,15 @@ const TodoContainer = () => {
   // from server
   const [priority, setPriority] = useState('');
   const { data: tasks = [], isLoading, isError } = useGetTaskQuery(priority);
-  console.log(tasks, 'task');
-  console.log(priority, 'priorty');
+  
   // const [selectedPriority, setSelectedPriority] = useState<
   //   'All' | 'High' | 'Medium' | 'Low'
   // >('All');
 
-  // const sortedTodos = [...tasks].sort((a, b) => {
-  //   if (a.isCompleted === b.isCompleted) return 0;
-  //   return a.isCompleted ? 1 : -1;
-  // });
+  const sortedTodos = [...tasks].sort((a, b) => {
+    if (a.isCompleted === b.isCompleted) return 0;
+    return a.isCompleted ? 1 : -1;
+  });
 
   // const filtere = sortedTodos.filter(item => {
   //   if (selectedPriority === 'All') {
@@ -60,8 +59,8 @@ const TodoContainer = () => {
         <h1 className="flex-2">Action</h1>
       </div>
       <div className="  bg-gradient-bg p-2  space-y-2 ">
-        {tasks.length > 0 ? (
-          tasks.map((item: JSX.IntrinsicAttributes & TTodo, key: Key | null | undefined) => <TodoCard key={key} {...item} />)
+        {sortedTodos.length > 0 ? (
+          sortedTodos.map((item: JSX.IntrinsicAttributes & TTodo, key: Key | null | undefined) => <TodoCard key={key} {...item} />)
         ) : (
           <div
             className="bg-red-600 text-white
